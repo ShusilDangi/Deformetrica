@@ -1,0 +1,12 @@
+Deformetrica - Change Log
+
+Deformetrica - 2.1 (Released 2014-12-19)
+========================================
+- [New] Computations are now in double precision instead of single precision.
+- [New] CudaExactKernel class added : the kernel evaluation benefits from CUDA acceleration.
+- [Enh] Optimization of the class ExactKernel.
+- [Bug] Small issue fixed in FastGauss class in order to perform computations in double precision.
+- [Bug] Default value for intial step multiplier set to 0.1 instead of 10.
+
+
+

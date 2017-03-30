@@ -1,0 +1,7 @@
+// The configured options and settings for Deformetrica :
+#define DEFORMETRICA_VERSION_MAJOR @DEFORMETRICA_VERSION_MAJOR@
+#define DEFORMETRICA_VERSION_MINOR @DEFORMETRICA_VERSION_MINOR@
+
+#cmakedefine USE_CUDA
+#cmakedefine USE_DOUBLE_PRECISION
+

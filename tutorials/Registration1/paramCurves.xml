@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<deformable-object-parameters>
+
+    <!-- Type of the deformable object (See DeformableObject::DeformableObjectType for details) -->
+    <deformable-object-type>NonOrientedPolyLine</deformable-object-type>
+    <!-- weight of the object in the fidelity-to-data term -->
+    <data-sigma>0.01</data-sigma>
+    <!-- kernel width -->
+    <kernel-width>30</kernel-width>
+
+</deformable-object-parameters>

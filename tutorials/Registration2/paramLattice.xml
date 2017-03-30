@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<deformable-object-parameters>
+
+	<deformable-object-type>NonOrientedPolyLine</deformable-object-type>
+	<!-- kernel-width -->
+	<kernel-width>30</kernel-width>
+
+</deformable-object-parameters>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<deformable-object-parameters>
+
+    <!-- Type of the deformable object (See DeformableObject::DeformableObjectType for details) -->
+	<deformable-object-type>NonOrientedSurfaceMesh</deformable-object-type>
+    <!-- weight of the object in the fidelity-to-data term -->
+	<data-sigma>10</data-sigma>
+    <!-- kernel width -->
+	<kernel-width>5</kernel-width>
+
+</deformable-object-parameters>

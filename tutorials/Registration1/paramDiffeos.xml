@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<sparse-diffeo-parameters>
+
+    <!--=======================-->
+    <!-- Compulsory parameters -->
+    <!--=======================-->
+    <!-- Size of the kernel (default : 0.0) -->
+    <kernel-width>40</kernel-width>
+    
+    <!--===================================-->
+    <!-- Optional parameters (recommanded) -->
+    <!--===================================-->
+    <!-- Choice of the evaluation method of the kernel : exact, fgt, p3m (default : p3m) -->
+    <kernel-type>Exact</kernel-type>
+
+    <!--=======================================-->
+    <!-- Optional parameters ('advanced' mode) -->
+    <!--=======================================-->
+    <!-- weight of the sparsity prior (default: 0.0) -->
+    <!-- <sparsity-prior>0.0</sparsity-prior> -->
+	
+    <!-- Number of threads (default : 1) -->
+    <!-- <number-of-threads>5</number-of-threads> -->
+    <!-- Choice of the number of time points between 0 and 1 (default : 10) -->
+    <number-of-timepoints>20</number-of-timepoints>
+	
+    <!-- ratio between the smoothing kernel width used in the gradient of template gradient and kernel width (default: 1.0)  -->
+    <!-- <smoothing-kernel-width-ratio>1.0</smoothing-kernel-width-ratio> -->
+	
+    <!-- Step of the regular lattice of control points (default : kernel-width) -->
+    <!-- <initial-cp-spacing>40</initial-cp-spacing> -->
+    <!-- Enables to freeze the control points or not (default : Off) -->
+    <!-- <freeze-cp>On</freeze-cp> -->    
+    <!-- File name containg control points position (default: void) -->
+    <!-- <initial-cp-position>filename</initial-cp-position> -->
+    <!-- File name containg initial momenta (default: void) -->
+    <!-- <initial-momenta>filename</initial-momenta> -->
+	
+    <!-- Optimization method (default : fista) -->
+    <!-- <optimization-method-type>GradientDescent</optimization-method-type> -->
+	
+    
+    <!--=======================================-->
+    <!-- Optional parameters (avoid to change) -->
+    <!--=======================================-->
+    <!-- Maximum of descent iterations (default : 100) -->
+    <!-- <max-iterations>100</max-iterations> -->
+    <!-- Adaptive tolerance (default : 1e-04) -->
+    <!-- <adaptive-tolerance>1e-4</adaptive-tolerance> -->
+    <!-- Maximum number for the search of the optimal step on an iteration (default : 10) -->
+    <!-- <max-line-search-iterations>20</max-line-search-iterations> -->
+    <!-- Step expand for the gradient descent (default : 2.0) -->
+    <!-- <step-expand>2.0</step-expand> -->
+    <!-- Step shrink for the gradient descent  (default : 0.5) -->
+    <!-- <step-shrink>0.5</step-shrink> -->
+    <!-- Initial step multiplier for gradient descent (default : 10.0) -->
+    <!-- <initial-step-multiplier>0.001</initial-step-multiplier> -->
+
+    <!-- Enlarges the grid by P3MPaddingFactor x KernelWidth to avoid side effects (default : 3.0) -->
+    <!-- <p3m-padding-factor>3.0</p3m-padding-factor> -->
+    <!-- 0.2 gives a relative approximation error of about 5%. Use 0.3 for increased speed (default : 0.2) -->
+    <!-- <p3m-working-spacing-ratio>0.2</p3m-working-spacing-ratio> -->
+    
+</sparse-diffeo-parameters>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<deformable-object-parameters>
+
+    <!-- Type of the deformable object (See DeformableObject::DeformableObjectType for details) -->
+	<deformable-object-type>OrientedSurfaceMesh</deformable-object-type>
+    <!-- Sigma parameter appearing in the fidelity-to-data term -->
+	<data-sigma>0.5</data-sigma>
+    <!-- Size of the kernel (default : 0.0) -->
+	<kernel-width>0.5</kernel-width>
+    <!-- Choice of the evaluation method of the kernel : exact, fgt, p3m (default : p3m) -->
+    <kernel-type>exact</kernel-type>
+    <!-- Reorients normals or not in a consistent way (default : On) -->
+	<REORIENT-NORMALS>On</REORIENT-NORMALS>
+
+</deformable-object-parameters>
