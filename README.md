@@ -5,8 +5,7 @@ Refer to the Deformetrica website for Installation details, User Manuals, Tutori
 http://www.deformetrica.org/
 
 Added Utility Functions:
-
-1) ----------------------------------------------------------------------
+-------------------------------------------------------------------------
 geodesicDist
 -------------------------------------------------------------------------
 This command computes the geodesic distance between the two subjects. User should provide the XML file with diffeomorphic 
@@ -18,9 +17,7 @@ geodesicDist paramDiffeos.xml CP.txt MOM.txt
 The geodesic distance is given by:
   geoDist = sum(mom*K*mom)
   mom -> Momenta, K -> Gaussian Kernel
-  
-  
-2) ------------------------------------------------------------------------
+---------------------------------------------------------------------------
 geodesicDistAtlas
 ---------------------------------------------------------------------------
 This command computes the geodesic distance between the mean subject and the subjects used to construct the atlas. User should
@@ -28,9 +25,7 @@ provide the XML file with diffeomorphic parameters (paramDiffeos.xml), final pos
 computed moments for all subjects in a single file (MOM.txt). The syntax is:
 
 geodesicDistAtlas paramDiffeos.xml CP.txt MOM.txt
-
-
-3) -------------------------------------------------------------------------
+----------------------------------------------------------------------------
 Regularization weights for the Atlas Computation
 ----------------------------------------------------------------------------
 Sum of geodesic distances from the mean shape to all the subjects in the atlas is used to regularize the Atlas construction.
@@ -42,9 +37,7 @@ The weights should to be provided through the "paramDiffeo.xml" file under the f
 e.g. <regularity-weights>0.1,0.2,0.3,0.2,0.1</regularity-weights>
 If the total number of regularity-weights does not match the number of subjects used to construct the Atlas, default uniform
 weighting scheme will be used.
-
-
-4) -------------------------------------------------------------------------- 
+-----------------------------------------------------------------------------
 Python Utility Files
 -----------------------------------------------------------------------------
 Functions.py
