@@ -12,11 +12,13 @@ This command computes the geodesic distance between the two subjects. User shoul
 parameters (paramDiffeos.xml), final position of the control points (CP.txt), and the computed moments (MOM.txt). 
 The syntax is:
 
-geodesicDist paramDiffeos.xml CP.txt MOM.txt
+  `geodesicDist paramDiffeos.xml CP.txt MOM.txt`
 
-The geodesic distance is given by:
-  geoDist = sum(mom*K*mom)
-  mom -> Momenta, K -> Gaussian Kernel
+The geodesic distance is given by
+geoDist = sum(mom\*K\*mom)
+
+mom - Momenta, K - Gaussian Kernel
+
 ---------------------------------------------------------------------------
 geodesicDistAtlas
 ---------------------------------------------------------------------------
@@ -24,7 +26,8 @@ This command computes the geodesic distance between the mean subject and the sub
 provide the XML file with diffeomorphic parameters (paramDiffeos.xml), final position of the control points (CP.txt), and the 
 computed moments for all subjects in a single file (MOM.txt). The syntax is:
 
-geodesicDistAtlas paramDiffeos.xml CP.txt MOM.txt
+`geodesicDistAtlas paramDiffeos.xml CP.txt MOM.txt`
+
 ----------------------------------------------------------------------------
 Regularization weights for the Atlas Computation
 ----------------------------------------------------------------------------
@@ -34,9 +37,12 @@ The regularization weights will force the mean shape to be closer to the subject
 Typical use of this weighting scheme could be to regress a shape using Weighted Nearest Neighbor scheme.
 
 The weights should to be provided through the "paramDiffeo.xml" file under the field "regularity-weights"
-e.g. <regularity-weights>0.1,0.2,0.3,0.2,0.1</regularity-weights>
+
+e.g. `<regularity-weights>0.1,0.2,0.3,0.2,0.1</regularity-weights>`
+
 If the total number of regularity-weights does not match the number of subjects used to construct the Atlas, default uniform
 weighting scheme will be used.
+
 -----------------------------------------------------------------------------
 Python Utility Files
 -----------------------------------------------------------------------------
@@ -59,6 +65,8 @@ Contains several utility functions:
 geodesicCranio.py, geodesicAtlas.py
 ------------------------------------------------------------------------------
 File demonstrating the computation of geodesic distances.
+
 Between two subjects -> geodesicCranio.py
+
 Mean to Atlas subjects -> geodesicAtlas.py
 
