@@ -29,21 +29,11 @@ float dist(SparseDiffeoParameters* paramDiffeos,
 		vnl_matrix<float>& MOM0,
 		const std::vector<char*> objectfnList)
 {
-	// std::cout << "Compute Geodesic Distance\n===" << std::endl;
-	// std::cout << "Control Points File: " << objectfnList[1] << std::endl;
-	// std::cout << "Moments File: " << objectfnList[2] << std::endl;
-	// std::cout << "\n===\n" << std::endl;
-	// std::cout << "Deformations Parameters:" << std::endl;
-	// paramDiffeos->PrintSelf(std::cout);
-	// std::cout << "\n===\n" << std::endl;
-	// std::cout << "Source file: " << objectfnList[0] << std::endl;
-	// std::cout << "\n===\n" << std::endl;
-	// std::cout << "number of CPs: " << CP0.rows() << std::endl;
 
 	if (CP0.rows() != MOM0.rows())
 		throw std::runtime_error("Number of CPs and Momentas mismatched");
 
-	// compute the geodesic distance: the squared norm of the initial velocity speed
+	// compute the geodesic distance: the squared norm of the initial velocity field
 	typedef KernelFactory<TScalar, Dimension> KernelFactoryType;
 	typedef typename KernelFactoryType::KernelBaseType KernelType;
 	KernelFactoryType* kfac = KernelFactoryType::Instantiate();
@@ -81,7 +71,6 @@ float dist(SparseDiffeoParameters* paramDiffeos,
 
 	KernelType* momKernelObj  = kfac->CreateKernelObject();
 	momKernelObj->SetKernelWidth(paramDiffeos->GetKernelWidth());
-	std::cout << "Kernel Width: " << paramDiffeos->GetKernelWidth() <<std::endl;
 	momKernelObj->SetSources(CP0);
 	momKernelObj->SetWeights(MOM0);
 	VNLMatrixType kMom = momKernelObj->Convolve(CP0);
@@ -90,7 +79,6 @@ float dist(SparseDiffeoParameters* paramDiffeos,
 	for (unsigned int i = 0; i < CP0.rows(); i++)
 	{
 		dist += dot_product(kMom.get_row(i), MOM0.get_row(i));
-		std::cout << kMom.get_row(i) << std::endl;
 	}
 
 	delete momKernelObj;

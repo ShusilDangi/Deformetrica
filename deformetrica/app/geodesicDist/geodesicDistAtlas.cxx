@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 
 int main(int argc, char** argv)
 {
@@ -52,7 +53,7 @@ int main(int argc, char** argv)
 		for(unsigned int i = 0; i<MOM0.size(); i++)
 		{
 			geoDist = dist<3>(paramDiffeos, CP0, MOM0[i], objectfn);
-			std::cout<< "Geodesic Distance: " << geoDist << std::endl;
+			std::cout<< "Geodesic Distance Subject " << std::to_string(i+1) << ": " << geoDist << std::endl;
 		}
 	}
 	catch (itk::ExceptionObject& e)

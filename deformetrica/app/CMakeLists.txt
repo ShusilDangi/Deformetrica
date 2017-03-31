@@ -172,13 +172,13 @@ Cuda_Add_Executable(geodesicDist
   geodesicDist/geodesicDist.cxx
 )
 
-Cuda_Add_Executable(geodesicDistMulti
+Cuda_Add_Executable(geodesicDistAtlas
   ../src/io/SparseDiffeoParametersXMLFile.cxx
   ../src/io/DeformableObjectParametersXMLFile.cxx
   ../src/io/SparseDiffeoParameters.cxx
   ../src/io/DeformableObjectParameters.cxx
   ../src/algo/utilities/myvtkPolyDataNormals.cxx
-  geodesicDist/geodesicDistMulti.cxx
+  geodesicDist/geodesicDistAtlas.cxx
 )
 
 else(USE_CUDA)
@@ -252,13 +252,13 @@ Add_Executable(geodesicDist
   geodesicDist/geodesicDist.cxx
 )
 
-Add_Executable(geodesicDistMulti
+Add_Executable(geodesicDistAtlas
   ../src/io/SparseDiffeoParametersXMLFile.cxx
   ../src/io/DeformableObjectParametersXMLFile.cxx
   ../src/io/SparseDiffeoParameters.cxx
   ../src/io/DeformableObjectParameters.cxx
   ../src/algo/utilities/myvtkPolyDataNormals.cxx
-  geodesicDist/geodesicDistMulti.cxx
+  geodesicDist/geodesicDistAtlas.cxx
 )
 
 endif(USE_CUDA)
@@ -324,7 +324,7 @@ Target_Link_Libraries(geodesicDist
   ${CUDA_LIBS}
 )
 
-Target_Link_Libraries(geodesicDistMulti
+Target_Link_Libraries(geodesicDistAtlas
   ${ITK_LIBRARIES}
   ${VTK_DEPENDANCIES}
   ${CUDA_LIBS}
@@ -368,7 +368,7 @@ Add_Dependencies (geodesicDist
   ${VTK_DEPENDANCIES}
 )
 
-Add_Dependencies (geodesicDistMulti
+Add_Dependencies (geodesicDistAtlas
   ${ITK_LIBRARIES}
   ${VTK_DEPENDANCIES}
 )
