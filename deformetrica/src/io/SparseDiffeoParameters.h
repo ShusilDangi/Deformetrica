@@ -111,6 +111,10 @@ public:
 	itkGetMacro(NumberOfThreads, unsigned int);
 	itkSetMacro(NumberOfThreads, unsigned int);
 
+	// Required if different regularization weights need to be assigned to different subjects
+	itkGetMacro(RegularityWeights, std::string);
+	itkSetMacro(RegularityWeights, std::string);
+
 
 protected:
 
@@ -156,6 +160,8 @@ protected:
 	double m_InitialStepMultiplier;
 
 	unsigned int m_NumberOfThreads;
+
+	std::string m_RegularityWeights;
 
 
 }; /* class SparseDiffeoParameters */

@@ -185,6 +185,10 @@ SparseDiffeoParametersXMLFileReader
 		long n = atol(m_CurrentString.c_str());
 		m_PObject->SetNumberOfThreads(n);
 	}
+	else if(itksys::SystemTools::Strucmp(name,"REGULARITY-WEIGHTS") == 0)
+	{
+		m_PObject->SetRegularityWeights(m_CurrentString);
+	}
 
 }
 
@@ -304,6 +308,8 @@ SparseDiffeoParametersXMLFileWriter
 
 	WriteField<double>(this, "SMOOTHING-KERNEL-WIDTH-RATIO", p->GetSmoothingKernelWidthRatio(), output);
 	WriteField<unsigned int>(this, "NUMBER-OF-THREADS", p->GetNumberOfThreads(), output);
+
+	WriteField<std::string>(this, "REGULARITY-WEIGHTS", p->GetRegularityWeights(), output);
 
 	// Finish
 	WriteEndElement("SPARSE-DIFFEO-PARAMETERS", output);

@@ -49,6 +49,8 @@ SparseDiffeoParameters
 	m_InitialStepMultiplier = 0.1;
 
 	m_NumberOfThreads = 1;
+
+	m_RegularityWeights = "uniform";
 }
 
 SparseDiffeoParameters
@@ -100,6 +102,7 @@ SparseDiffeoParameters
 	os << "Initial momenta loaded from " << m_InitialMomenta_fn << std::endl;
 	os << std::endl;
 	os << "Sparsity prior = " << m_SparsityPrior << std::endl;
+	os << "Regularity Weights = " << m_RegularityWeights << std::endl;
 	os << std::endl;
 	os << "SmoothingKernelWidthRatio = " << m_SmoothingKernelWidthRatio << std::endl;
 	os << "Optimization method: " << m_OptimizationMethodType << std::endl;

@@ -14,6 +14,9 @@
 #include <vector>
 #include <vnl/vnl_vector.h>
 
+#include <string>
+#include <sstream>
+#include <iostream>
 
 /**
  *	\brief 		Values of the functional during atlas estimation.
@@ -56,10 +59,11 @@ public:
 
 	/// Constructor with initialization of the number of deformable objects
 	/// (resp. the number of subjects) to \e nobj (resp. \e to nsubj).
-	AtlasFunctionalValues(int nobj, int nsubj)
+	AtlasFunctionalValues(int nobj, int nsubj, std::string weights)
 	{
 		m_NumberOfObjects = nobj;
 		m_NumberOfSubjects = nsubj;
+		SetRegularityWeights(weights);
 
 		m_DataTerm.resize(m_NumberOfSubjects);
 		for (int s = 0; s < m_NumberOfSubjects; s++)
@@ -86,6 +90,7 @@ public:
 
 		m_DataTerm = other.m_DataTerm;
 		m_Regularity = other.m_Regularity;
+		m_RegularityWeights = other.m_RegularityWeights;
 		m_Sparsity = other.m_Sparsity;
 
 		m_OutOfBox = other.m_OutOfBox;
@@ -150,6 +155,37 @@ public:
 	// Other method(s) :
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/// Sets the regularity weights for the \e s-th subject according to the paramsDiffeo file
+	void SetRegularityWeights(std::string weights)
+	{
+		std::cout << "Here!" << std::endl;
+		// Equal weights to each subject by default
+		m_RegularityWeights.resize(m_NumberOfSubjects, 1.0/m_NumberOfSubjects);
+		if(weights!="uniform")
+		{
+			std::cout <<"Inside Not Equal" << std::endl;
+			std::stringstream ss(weights);
+			TScalar w;
+			int count = 0;
+			while(ss >> w)
+			{
+				m_RegularityWeights[count] = w;
+				if(ss.peek() == ',' | ss.peek() == ' ')
+					ss.ignore();
+				++count;
+			}
+
+			if(count != m_NumberOfSubjects)
+			{
+				// If the number of provided weights does not match the number of subjects, use uniform weights
+				std::cout << "Number of weights not equal to the number of patients!" << std::endl;
+				std::cout << "Using uniform Regularity weights" << std::endl;
+				for(int j=0; j<m_RegularityWeights.size(); j++)
+					m_RegularityWeights[j] = 1.0/m_NumberOfSubjects;
+        	}
+		}
+	}
+
 	/// Updates the different total values and the fidelity-to-data term per object.
 	void Update()
 	{
@@ -174,10 +210,10 @@ public:
 		m_TotalSparsity = 0.0;
 		for (int s = 0; s < m_NumberOfSubjects; s++)
 		{
-			m_TotalRegularity += m_Regularity[s];
+			m_TotalRegularity += m_RegularityWeights[s]*m_Regularity[s];
 			m_TotalSparsity += m_Sparsity[s];
 		}
-		m_TotalRegularity /= m_NumberOfSubjects;
+		// m_TotalRegularity /= m_NumberOfSubjects;
 		m_TotalSparsity /= m_NumberOfSubjects;
 
 		m_TotalValue = m_TotalDataTerm + m_TotalRegularity + m_TotalSparsity;
@@ -216,6 +252,9 @@ protected:
 
 	/// Vector of \f$\nbsubj\f$ regularity terms.
 	VectorType m_Regularity;
+
+	/// Vector of \f$\nbsubj\f$ regularity weights.
+	VectorType m_RegularityWeights;
 
 	/// Vector of \f$\nbsubj\f$ \f$\Lone\f$ prior terms.
 	VectorType m_Sparsity;

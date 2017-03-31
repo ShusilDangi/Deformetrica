@@ -218,6 +218,7 @@ void estimateAtlas(
 	atlasbuilder->SetInitialCPPosition(paramDiffeos->GetInitialCPPosition_fn()); // null string means no InitialCPPosition given (will be initialized with a regular lattice)
 	atlasbuilder->SetInitialMomentas(paramDiffeos->GetInitialMomenta_fn()); // null string means no InitialMomenta given (will be initialized with zero)
 	atlasbuilder->SetSparsityPrior(paramDiffeos->GetSparsityPrior());
+	atlasbuilder->SetRegularityWeights(paramDiffeos->GetRegularityWeights());
 	if (itksys::SystemTools::Strucmp(paramDiffeos->GetOptimizationMethodType().c_str(), "gradientdescent") == 0)
 	{
 		atlasbuilder->SetGradientDescent();
