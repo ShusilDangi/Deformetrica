@@ -11,7 +11,7 @@ Endif (COMMAND cmake_policy)
 # ITK :
 Find_Package(ITK)
 If (ITK_FOUND)
-    Include (${USE_ITK_FILE})
+    Include (${ITK_USE_FILE})
 Else (ITK_FOUND)
     Message (FATAL_ERROR "ITK not found. Please set ITK_DIR.")
 Endif (ITK_FOUND)
