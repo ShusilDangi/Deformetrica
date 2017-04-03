@@ -158,12 +158,10 @@ public:
 	/// Sets the regularity weights for the \e s-th subject according to the paramsDiffeo file
 	void SetRegularityWeights(std::string weights)
 	{
-		std::cout << "Here!" << std::endl;
 		// Equal weights to each subject by default
 		m_RegularityWeights.resize(m_NumberOfSubjects, 1.0/m_NumberOfSubjects);
 		if(weights!="uniform")
 		{
-			std::cout <<"Inside Not Equal" << std::endl;
 			std::stringstream ss(weights);
 			TScalar w;
 			int count = 0;
