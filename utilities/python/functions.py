@@ -6,12 +6,12 @@ import os
 
 
 def pathToFile(ROOT_DIR,FILENAME):
-	DIR = []
+	filePath = []
 	for dirpath, dirnames, filenames in os.walk(ROOT_DIR):
 		for filename in filenames:
-			if filename == FILENAME:
-				DIR.append(dirpath)
-	return DIR
+			if filename.lower() == FILENAME.lower():
+				filePath.append(os.path.join(dirpath,filename))
+	return filePath
 
 
 def readCP(fileName):
@@ -69,7 +69,7 @@ def readKernelWidth(fileName):
 def addWeightsToXML(fileName,weights):
 	tree = ET.parse(fileName)
 	root = tree.getroot()
-	subElement = ET.Element('weights')
+	subElement = ET.Element('regularity-weights')
 	subElement.text = weights
 	root.append(subElement)
 	tree.write(fileName)
@@ -108,4 +108,5 @@ def gaussianWeight(dist,var):
 def eucledianAngle(v1,v2):
 	angle = np.sum(np.multiply(v1,v2))/(np.sum(np.multiply(v1,v1))*np.sum(np.multiply(v2,v2)))
 	return angle
+
 
