@@ -60,6 +60,7 @@ Contains several utility functions:
 - Compute the Geodesic Distance using Gaussian Kernel and Moments
 - Compute the dot product in Kernel space
 - Read the directory path to specified FileName within the RootDirectory
+- Find closest Normal subjects in Atlas from the outlier patient based on approximate geodesic distances
 
 ------------------------------------------------------------------------------
 geodesicCranio.py, geodesicAtlas.py
