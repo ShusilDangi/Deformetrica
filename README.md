@@ -53,7 +53,7 @@ Contains several utility functions:
 - Read Moment File
 - Read Atlas Moments File
 - Read Kernel Width from the paramDiffeos.xml file
-- Add fields to the XML file (add <regularity-weights> to 'paramDiffeo.xml')
+- Add fields to the XML file (add `<regularity-weights>` to 'paramDiffeo.xml')
 - Compute the Gaussian Kernel from Control Points and Kernel Width
 - Convert Moments to Velocity field
 - Convert Velocity field to Moments
