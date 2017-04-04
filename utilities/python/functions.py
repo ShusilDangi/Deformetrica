@@ -110,3 +110,12 @@ def eucledianAngle(v1,v2):
 	return angle
 
 
+def sortAtlasGeodesicDist(momSubject,momAtlas,K):
+	geodesicDistances = []
+	for momNormal in momAtlas:
+		diff = momSubject - momNormal
+		geodesicDistances.append(dotProduct(diff, diff, K))
+	geodesicDistances = np.asarray(geodesicDistances)
+	indSort = np.argsort(geodesicDistances)
+	return(geodesicDistances,indSort)
+
