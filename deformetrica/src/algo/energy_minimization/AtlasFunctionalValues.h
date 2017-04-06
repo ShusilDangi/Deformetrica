@@ -63,7 +63,7 @@ public:
 	{
 		m_NumberOfObjects = nobj;
 		m_NumberOfSubjects = nsubj;
-		SetRegularityWeights(weights);
+		SetWeights(weights);
 
 		m_DataTerm.resize(m_NumberOfSubjects);
 		for (int s = 0; s < m_NumberOfSubjects; s++)
@@ -90,7 +90,7 @@ public:
 
 		m_DataTerm = other.m_DataTerm;
 		m_Regularity = other.m_Regularity;
-		m_RegularityWeights = other.m_RegularityWeights;
+		m_Weights = other.m_Weights;
 		m_Sparsity = other.m_Sparsity;
 
 		m_OutOfBox = other.m_OutOfBox;
@@ -156,10 +156,10 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/// Sets the regularity weights for the \e s-th subject according to the paramsDiffeo file
-	void SetRegularityWeights(std::string weights)
+	void SetWeights(std::string weights)
 	{
 		// Equal weights to each subject by default
-		m_RegularityWeights.resize(m_NumberOfSubjects, 1.0/m_NumberOfSubjects);
+		m_Weights.resize(m_NumberOfSubjects, 1.0/m_NumberOfSubjects);
 		if(weights!="uniform")
 		{
 			std::stringstream ss(weights);
@@ -167,7 +167,7 @@ public:
 			int count = 0;
 			while(ss >> w)
 			{
-				m_RegularityWeights[count] = w;
+				m_Weights[count] = w;
 				if(ss.peek() == ',' | ss.peek() == ' ')
 					ss.ignore();
 				++count;
@@ -178,8 +178,8 @@ public:
 				// If the number of provided weights does not match the number of subjects, use uniform weights
 				std::cout << "Number of weights not equal to the number of patients!" << std::endl;
 				std::cout << "Using uniform Regularity weights" << std::endl;
-				for(int j=0; j<m_RegularityWeights.size(); j++)
-					m_RegularityWeights[j] = 1.0/m_NumberOfSubjects;
+				for(int j=0; j<m_Weights.size(); j++)
+					m_Weights[j] = 1.0/m_NumberOfSubjects;
         	}
 		}
 	}
@@ -199,7 +199,7 @@ public:
 			for (int s = 0; s < m_NumberOfSubjects; s++)
 				val += m_DataTerm[s][i];
 
-			val /= m_NumberOfSubjects;
+			val = m_Weights[i]*val;					// Weighting Data Term according to provided weights
 			m_DataTermPerObject[i] = val;
 			m_TotalDataTerm += val;
 		}
@@ -208,7 +208,7 @@ public:
 		m_TotalSparsity = 0.0;
 		for (int s = 0; s < m_NumberOfSubjects; s++)
 		{
-			m_TotalRegularity += m_RegularityWeights[s]*m_Regularity[s];
+			m_TotalRegularity += m_Weights[s]*m_Regularity[s];		// Weighting Regularity Term according to provided weights
 			m_TotalSparsity += m_Sparsity[s];
 		}
 		// m_TotalRegularity /= m_NumberOfSubjects;
@@ -252,7 +252,7 @@ protected:
 	VectorType m_Regularity;
 
 	/// Vector of \f$\nbsubj\f$ regularity weights.
-	VectorType m_RegularityWeights;
+	VectorType m_Weights;
 
 	/// Vector of \f$\nbsubj\f$ \f$\Lone\f$ prior terms.
 	VectorType m_Sparsity;

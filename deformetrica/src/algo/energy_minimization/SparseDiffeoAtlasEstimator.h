@@ -139,7 +139,7 @@ public:
 	inline void SetSparsityPrior(TScalar d) { m_SparsityPrior = d; }
 
 	/// Set the Regularity Weights for different subjects according to the pramsDiffeo file.
-	inline void SetRegularityWeights(std::string w) { m_RegularityWeights = w; }
+	inline void SetWeights(std::string w) { m_Weights = w; }
 
 	/// Sets the list of targets to \e obj.
 	inline void SetTargetList(DeformableMultiObjectList& obj)
@@ -427,7 +427,7 @@ protected:
 	TScalar m_SparsityPrior;
 
 	/// Regularity weights for each subject.
-	std::string m_RegularityWeights;
+	std::string m_Weights;
 
 	/// Boolean which indicates if use the Fast Iterative Shrinkage-Thresholding Algorithm (FISTA) or not.
 	bool m_UseFISTA;

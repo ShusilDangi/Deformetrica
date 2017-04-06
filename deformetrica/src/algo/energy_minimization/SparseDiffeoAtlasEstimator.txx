@@ -45,7 +45,7 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 	m_InitialStepMultiplier = 1.0;
 
 	m_SparsityPrior = 0.0;
-	m_RegularityWeights = "uniform";
+	m_Weights = "uniform";
 	m_OptimizationMethod = null;
 
 	m_freezeCP = false;
@@ -949,8 +949,7 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
  {
 	m_Template->SetImageAndPointData(TempL);
 
-	FunctionalValuesType* funcValues = new FunctionalValuesType(m_NumberOfObjects, m_NumberOfSubjects, m_RegularityWeights);
-	// funcValues->SetRegularityWeights(m_RegularityWeights);
+	FunctionalValuesType* funcValues = new FunctionalValuesType(m_NumberOfObjects, m_NumberOfSubjects, m_Weights);
 
 	for (int s = 0; s < m_NumberOfSubjects; s++)
 	{
@@ -1199,7 +1198,7 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 	m_Template->SetImageAndPointData(TempL);
 
 	delete m_MT_FuncValues;
-	m_MT_FuncValues = new FunctionalValuesType(m_NumberOfObjects, m_NumberOfSubjects, m_RegularityWeights);
+	m_MT_FuncValues = new FunctionalValuesType(m_NumberOfObjects, m_NumberOfSubjects, m_Weights);
 
 	itk::MultiThreader::Pointer threader = itk::MultiThreader::New();
 
