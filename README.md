@@ -53,13 +53,14 @@ Contains several utility functions:
 - Read Moment File
 - Read Atlas Moments File
 - Read Kernel Width from the paramDiffeos.xml file
-- Add fields to the XML file (add <regularity-weights> to 'paramDiffeo.xml')
+- Add fields to the XML file (add `<regularity-weights>` to 'paramDiffeo.xml')
 - Compute the Gaussian Kernel from Control Points and Kernel Width
 - Convert Moments to Velocity field
 - Convert Velocity field to Moments
 - Compute the Geodesic Distance using Gaussian Kernel and Moments
 - Compute the dot product in Kernel space
 - Read the directory path to specified FileName within the RootDirectory
+- Find closest Normal subjects in Atlas from the outlier patient based on approximate geodesic distances
 
 ------------------------------------------------------------------------------
 geodesicCranio.py, geodesicAtlas.py
