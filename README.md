@@ -29,18 +29,18 @@ computed moments for all subjects in a single file (MOM.txt). The syntax is:
 `geodesicDistAtlas paramDiffeos.xml CP.txt MOM.txt`
 
 ----------------------------------------------------------------------------
-Regularization weights for the Atlas Computation
+Weighted Atlas Computation
 ----------------------------------------------------------------------------
-Sum of geodesic distances from the mean shape to all the subjects in the atlas is used to regularize the Atlas construction.
-By default, the geodesic distances are weighted equally, forcing the mean shape to be equi-distant from all the subjects. 
-The regularization weights will force the mean shape to be closer to the subjects with higher weights. 
-Typical use of this weighting scheme could be to regress a shape using Weighted Nearest Neighbor scheme.
+The total cost (data+regularity) is weighted differently for different subjects during Atlas construction.
+By default, the subjects are weighted equally, forcing the mean shape to be equi-distant from all the subjects. 
+The weighting scheme will force the mean shape to be closer to the subjects with higher weights. 
+Typical use of this weighting scheme could be to regress a shape using Weighted Nearest Neighbo.
 
-The weights should to be provided through the "paramDiffeo.xml" file under the field "regularity-weights"
+The weights should to be provided through the "paramDiffeo.xml" file under the field "weights"
 
-e.g. `<regularity-weights>0.1,0.2,0.3,0.2,0.1</regularity-weights>`
+e.g. `<weights>0.1,0.2,0.3,0.2,0.1</weights>`
 
-If the total number of regularity-weights does not match the number of subjects used to construct the Atlas, default uniform
+If the total number of weights does not match the number of subjects used to construct the Atlas, default uniform
 weighting scheme will be used.
 
 -----------------------------------------------------------------------------
