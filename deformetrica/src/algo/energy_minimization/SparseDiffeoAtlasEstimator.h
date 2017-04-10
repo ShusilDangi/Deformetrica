@@ -47,6 +47,8 @@ public:
 	// typedef :
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	/// Vector type (std).
+	typedef std::vector<TScalar> VectorType;
 	/// Vector type
 	typedef vnl_vector<TScalar> VNLVectorType;
 	/// Matrix type.
@@ -138,9 +140,6 @@ public:
 	/// Set the sparsity prior to \e d.
 	inline void SetSparsityPrior(TScalar d) { m_SparsityPrior = d; }
 
-	/// Set the Regularity Weights for different subjects according to the pramsDiffeo file.
-	inline void SetWeights(std::string w) { m_Weights = w; }
-
 	/// Sets the list of targets to \e obj.
 	inline void SetTargetList(DeformableMultiObjectList& obj)
 	{
@@ -176,6 +175,35 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Other method(s) :
 	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// Sets the weights for the \e s-th subject according to the paramsDiffeo file
+ 	void SetWeights(std::string weights)
+	{
+		// Equal weights to each subject by default
+		m_Weights.resize(m_NumberOfSubjects, 1.0/m_NumberOfSubjects);
+		if(weights!="uniform")
+		{
+			std::stringstream ss(weights);
+			TScalar w;
+			int count = 0;
+			while(ss >> w)
+			{
+				m_Weights[count] = w;
+				if(ss.peek() == ',' | ss.peek() == ' ')
+					ss.ignore();
+				++count;
+			}
+
+			if(count != m_NumberOfSubjects)
+			{
+				// If the number of provided weights does not match the number of subjects, use uniform weights
+				std::cout << "Number of weights not equal to the number of patients!" << std::endl;
+				std::cout << "Using uniform Regularity weights" << std::endl;
+				for(int j=0; j<m_Weights.size(); j++)
+					m_Weights[j] = 1.0/m_NumberOfSubjects;
+        	}
+		}
+	}
 
 	/// Returns the list of deformed objects at final time.
 	DeformableMultiObjectList GetDeformedObjects();
@@ -426,8 +454,8 @@ protected:
 	/// Weight of the \f$L^1\f$ penalty in the functional.
 	TScalar m_SparsityPrior;
 
-	/// Regularity weights for each subject.
-	std::string m_Weights;
+	/// Weights for each subject.
+	VectorType m_Weights;
 
 	/// Boolean which indicates if use the Fast Iterative Shrinkage-Thresholding Algorithm (FISTA) or not.
 	bool m_UseFISTA;

@@ -59,11 +59,11 @@ public:
 
 	/// Constructor with initialization of the number of deformable objects
 	/// (resp. the number of subjects) to \e nobj (resp. \e to nsubj).
-	AtlasFunctionalValues(int nobj, int nsubj, std::string weights)
+	AtlasFunctionalValues(int nobj, int nsubj, VectorType weights)
 	{
 		m_NumberOfObjects = nobj;
 		m_NumberOfSubjects = nsubj;
-		SetWeights(weights);
+		m_Weights = weights;
 
 		m_DataTerm.resize(m_NumberOfSubjects);
 		for (int s = 0; s < m_NumberOfSubjects; s++)
@@ -154,35 +154,6 @@ public:
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Other method(s) :
 	////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	/// Sets the regularity weights for the \e s-th subject according to the paramsDiffeo file
-	void SetWeights(std::string weights)
-	{
-		// Equal weights to each subject by default
-		m_Weights.resize(m_NumberOfSubjects, 1.0/m_NumberOfSubjects);
-		if(weights!="uniform")
-		{
-			std::stringstream ss(weights);
-			TScalar w;
-			int count = 0;
-			while(ss >> w)
-			{
-				m_Weights[count] = w;
-				if(ss.peek() == ',' | ss.peek() == ' ')
-					ss.ignore();
-				++count;
-			}
-
-			if(count != m_NumberOfSubjects)
-			{
-				// If the number of provided weights does not match the number of subjects, use uniform weights
-				std::cout << "Number of weights not equal to the number of patients!" << std::endl;
-				std::cout << "Using uniform Regularity weights" << std::endl;
-				for(int j=0; j<m_Weights.size(); j++)
-					m_Weights[j] = 1.0/m_NumberOfSubjects;
-        	}
-		}
-	}
 
 	/// Updates the different total values and the fidelity-to-data term per object.
 	void Update()

@@ -45,7 +45,7 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 	m_InitialStepMultiplier = 1.0;
 
 	m_SparsityPrior = 0.0;
-	m_Weights = "uniform";
+	SetWeights("uniform");
 	m_OptimizationMethod = null;
 
 	m_freezeCP = false;
@@ -1070,15 +1070,16 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 		VNLMatrixList dTempL(m_NumberOfObjects);
 		this->ComputeGradientSubject(X0, Mom0[s], dPos, dMom, dTempL, m_TargetList[s]);
 
-		m_GradPos += dPos;
-		dMom /= m_NumberOfSubjects;
+		m_GradPos += m_Weights[s]*dPos;
+		dMom *= m_Weights[s];
 		m_GradMom[s] = dMom;
 
 		for (int i = 0; i < m_NumberOfObjects; i++)
-			m_GradTemplate_L2[i] += (dTempL[i] / m_NumberOfSubjects);
+			m_GradTemplate_L2[i] += (m_Weights[s]*dTempL[i]);
+			// m_GradTemplate_L2[i] += (dTempL[i] / m_NumberOfSubjects);
 	}
 
-	m_GradPos /= m_NumberOfSubjects;
+	// m_GradPos /= m_NumberOfSubjects;
 	this->ConvolveGradTemplate(TempL);
 
  }
@@ -1320,7 +1321,7 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 			&SparseDiffeoAtlasEstimator::_gradientThread, (void*)this);
 	threader->SingleMethodExecute();
 
-	m_GradPos /= m_NumberOfSubjects;
+	// m_GradPos /= m_NumberOfSubjects;
 	this->ConvolveGradTemplate(TempL);	
 
  }
@@ -1356,10 +1357,11 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 				obj->m_TargetList[s]);
 
 		obj->m_Mutex.Lock();
-		obj->m_GradPos += dPos;
+		obj->m_GradPos += obj->m_Weights[s]*dPos;
 		obj->m_Mutex.Unlock();
 
-		dMom /= obj->m_NumberOfSubjects;
+		// dMom /= obj->m_NumberOfSubjects;
+		dMom *= obj->m_Weights[s];
 
 		obj->m_Mutex.Lock();
 		obj->m_GradMom[s] = dMom;
@@ -1368,7 +1370,8 @@ SparseDiffeoAtlasEstimator<TScalar, Dimension>
 		for (int i = 0; i < obj->m_NumberOfObjects; i++)
 		{
 			obj->m_Mutex.Lock();
-			obj->m_GradTemplate_L2[i] += (dTempL[i] / obj->m_NumberOfSubjects);
+			obj->m_GradTemplate_L2[i] += (obj->m_Weights[s]*dTempL[i]);
+			// obj->m_GradTemplate_L2[i] += (dTempL[i] / obj->m_NumberOfSubjects);
 			obj->m_Mutex.Unlock();
 		}
 
