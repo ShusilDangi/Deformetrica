@@ -168,9 +168,9 @@ public:
 		{
 			TScalar val = 0.0;
 			for (int s = 0; s < m_NumberOfSubjects; s++)
-				val += m_DataTerm[s][i];
+				val += m_Weights[s]*m_DataTerm[s][i];				// Weighting Data Term according to provided weights
 
-			val = m_Weights[i]*val;					// Weighting Data Term according to provided weights
+			// val /= m_NumberOfSubjects;
 			m_DataTermPerObject[i] = val;
 			m_TotalDataTerm += val;
 		}
